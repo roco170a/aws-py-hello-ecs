@@ -153,3 +153,16 @@ Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICE
 ## 📬 Contacto
 - **Autor**: [Tu Nombre](https://github.com/tu-usuario)
 - **Email**: tu-email@example.com
+
+
+## Instalación de agente de AWS:
+sudo apt update
+sudo apt install ruby-full
+sudo apt install wget
+cd /home/ubuntu
+wget https://aws-codedeploy-us-west-2.s3.us-west-2.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+systemctl status codedeploy-agent
+
+
