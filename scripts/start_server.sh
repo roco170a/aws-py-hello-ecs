@@ -4,3 +4,4 @@ cd /home/ubuntu/mi-fastapi-app
 source venv/bin/activate
 # Ejecuta Uvicorn usando el Python del entorno virtual
 python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload &
+
