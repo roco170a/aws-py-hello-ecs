@@ -1,26 +1,28 @@
-version: 0.0  # Versión del formato de appspec
-os: linux  # Sistema operativo de las instancias
+version: 0.0
+os: linux
 
-# Archivos que se copiarán al servidor
 files:
-  - source: /  # Copia todos los archivos del proyecto
-    destination: /home/ubuntu/mi-fastapi-app  # Directorio de destino en el servidor
+  - source: /
+    destination: /home/ubuntu/mi-fastapi-app
 
-# Permisos para los archivos copiados
 permissions:
   - object: /home/ubuntu/mi-fastapi-app
-    owner: ubuntu  # Dueño de los archivos
-    group: ubuntu  # Grupo de los archivos
-    mode: 755  # Permisos (rwxr-xr-x)
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
 
-# Hooks: scripts que se ejecutan en diferentes etapas del despliegue
 hooks:
   BeforeInstall:
-    - location: scripts/stop_server.sh  # Detiene el servidor actual (si existe)
-      timeout: 300  # Tiempo máximo de ejecución en segundos
-      runas: ubuntu  # Usuario que ejecuta el script
+    - location: scripts/install_python.sh
+      timeout: 600
+      runas: root  # Necesitas permisos de root para instalar Python
+
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 600
+      runas: ubuntu
 
   ApplicationStart:
-    - location: scripts/start_server.sh  # Inicia el servidor FastAPI
+    - location: scripts/start_server.sh
       timeout: 300
       runas: ubuntu
